@@ -74,10 +74,10 @@ public class TestDataUtil {
 		//create 1 insurer
 		//create 1 insurer
 		 PostCode postCode1 = new PostCode();
-		 postCode1.setPostCode("2001");
+		 postCode1.setPostCode("2009");
 		 
 		 PostCode postCode2 = new PostCode();
-		 postCode2.setPostCode("2011");
+		 postCode2.setPostCode("2019");
 		 
 		 Occupation occupation = new Occupation();
 		 occupation.setOccupation("COBBLER");

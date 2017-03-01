@@ -93,9 +93,10 @@ public class CriteriaInsurerImpl implements ICriteria<CustomerQuery,Insurer>{
 		}
 		
 		if((excludedInsurers!=null && excludedInsurers.size()>0)){
+			List excludedInsurersList = new ArrayList(excludedInsurers);
 		for(Insurer i:allInsurers){
 			
-			if(!excludedInsurers.contains(i))
+			if(!excludedInsurersList.contains(i))
 				finalList.put(i.getName(), ApplicationConfiguration.PRICE_QUOTE);
 		}
 		}

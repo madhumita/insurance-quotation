@@ -46,6 +46,10 @@ public class CriteriaInsurerImplTest {
 	@Mock
 	private ApplicationConfiguration config;
 	
+
+	@Mock
+	private InsurerServiceImpl insurerServiceImpl;
+	
 	@Mock
 	private InsurerRepository insurerRepository;
 	
@@ -57,16 +61,18 @@ public class CriteriaInsurerImplTest {
 		 
 		 MockitoAnnotations.initMocks(this);
 		 List<String> mustCriteria = Arrays.asList("PostCode","Occupation");
-		 List<String> shouldCriteria = Arrays.asList("less than minimumTurnover");
+		 List<String> shouldCriteria = Arrays.asList("less than minimumTurnOver");
 		 when(config.getMustCriteria()).thenReturn(mustCriteria);
+		 when(config.getShouldCriteria()).thenReturn(shouldCriteria);
 		 
 	 }
 	
+	 //Test to check where all insurers are eligible for panel
 	 @Test
 	 public void checkCriteriaAndReturnQuotewhereAllInsurersAreEligible() throws Exception {
 		 
 		 CustomerQuery query = TestDataUtil.getRequestQuery();
-		 List<Insurer> excludedInsurers = TestDataUtil.getInsurersWithExcludedPostCodeAndOccupation();
+		 List<Insurer> excludedInsurers = new ArrayList<Insurer>();
 		 when(insurerRepository.findByExcludedOccupationsAndExcludedPostCodes(anyString(),anyString())).thenReturn(excludedInsurers);
 		 when(insurerRepository.findByMinimumTurnOverGreaterThan(Matchers.anyLong())).thenReturn(excludedInsurers);
 			
@@ -79,7 +85,26 @@ public class CriteriaInsurerImplTest {
 	  
 	    }
 	 
+	 //Test to check where no insurers are eligible for Panel
+	 @Test
+	 public void checkCriteriaAndReturnQuotewhereNoInsurersAreEligible() throws Exception {
+		 
+		 CustomerQuery query = TestDataUtil.getRequestQuery();
+		 List<Insurer> excludedInsurers = TestDataUtil.getInsurers();
+		 when(insurerRepository.findByExcludedOccupationsAndExcludedPostCodes(anyString(),anyString())).thenReturn(excludedInsurers);
+		 when(insurerRepository.findByMinimumTurnOverGreaterThan(Matchers.anyLong())).thenReturn(excludedInsurers);
+			
+		 List<Insurer> insurers = TestDataUtil.getInsurers();
+		
+		 Map<String,Double> map = criteriaInsurerImpl.checkCriteriaAndReturnQuote(query, insurers);
+		 
+		 assertNotNull(map);
+		 assertEquals(0,map.size());
+	  
+	    }
 	 
+	 
+	 //Test to check where insurer is excluded from panel due to minimumTurnOver criteria
 	 @Test
 	 public void checkCriteriaAndReturnQuotewhereCustomerHaslessMinimumTurnOver() throws Exception {
 		 
@@ -90,13 +115,10 @@ public class CriteriaInsurerImplTest {
 		 query.setTurnOver(106000);
 		 
 		 List<Insurer> insurers = TestDataUtil.getInsurers();
-		 //List<Insurer> excludedInsurers = TestDataUtil.getInsurersWithExcludedPostCodeAndOccupation();
 		 List<Insurer> excludedInsurers = TestDataUtil.getExInsurersWithGreaterTurnOver();
-		 //when(insurerRepository.findByExcludedOccupationsAndExcludedPostCodes(anyString(),anyString())).thenReturn(excludedInsurers);
-		 when(insurerRepository.findByMinimumTurnOverGreaterThan(Matchers.anyLong())).thenReturn(insurers);
+		 when(insurerRepository.findByMinimumTurnOverGreaterThan(Matchers.anyLong())).thenReturn(excludedInsurers);
 			
-		 
-		
+		 		
 		 Map<String,Double> map = criteriaInsurerImpl.checkCriteriaAndReturnQuote(query, insurers);
 		 
 		 assertNotNull(map);
@@ -105,6 +127,7 @@ public class CriteriaInsurerImplTest {
 	  
 	    }
 	 
+	 //Test to check where insurer is excluded from panel due to postCode and Occupation criteria
 	 @Test
 	 public void checkCriteriaAndReturnQuotewhereCustomerHasExcludedPostcodeandOccupation() throws Exception {
 		 
@@ -114,11 +137,10 @@ public class CriteriaInsurerImplTest {
 		 query.setPostCode("2100");
 		 query.setTurnOver(156000);
 		 
-		 List<Insurer> excludedInsurers = TestDataUtil.getInsurers();
+		 List<Insurer> excludedInsurers = TestDataUtil.getInsurersWithExcludedPostCodeAndOccupation();
 		 List<Insurer> excludedInsurersforTurnOver = TestDataUtil.getExInsurersWithGreaterTurnOver();
-		 //when(insurerRepository.findByExcludedOccupationsAndExcludedPostCodes(anyString(),anyString())).thenReturn(excludedInsurers);
-		 //when(insurerRepository.findByMinimumTurnOverGreaterThan(Matchers.anyLong())).thenReturn(excludedInsurersforTurnOver);
-			
+		 when(insurerRepository.findByExcludedOccupationsAndExcludedPostCodes(anyString(),anyString())).thenReturn(excludedInsurers);
+		 
 		 List<Insurer> insurers = TestDataUtil.getInsurers();
 		
 		 Map<String,Double> map = criteriaInsurerImpl.checkCriteriaAndReturnQuote(query, insurers);

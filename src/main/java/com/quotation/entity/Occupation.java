@@ -65,5 +65,19 @@ public class Occupation implements Serializable {
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Occupation)) {
+            return false;
+        }
+
+        Occupation occupation = (Occupation) o;
+
+        return occupation.occupation.equals(occupation);
+                
+    }
 
 }

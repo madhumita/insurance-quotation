@@ -95,5 +95,21 @@ public class Insurer implements Serializable {
 	public void setMinimumTurnOver(long minimumTurnOver) {
 		this.minimumTurnOver = minimumTurnOver;
 	}
+	
+	 @Override
+	    public boolean equals(Object o) {
+
+	        if (o == this) return true;
+	        if (!(o instanceof Insurer)) {
+	            return false;
+	        }
+
+	        Insurer insurer = (Insurer) o;
+
+	        return insurer.name.equals(name) &&
+	        		insurer.website == website &&
+	        		insurer.minimumTurnOver == minimumTurnOver;
+	                
+	    }
 
 }

@@ -64,5 +64,20 @@ public class PostCode implements Serializable {
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof PostCode)) {
+            return false;
+        }
+
+        PostCode postCode = (PostCode) o;
+
+        return postCode.postCode.equals(postCode);
+                
+    }
+
 
 }
