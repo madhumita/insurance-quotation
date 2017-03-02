@@ -44,11 +44,12 @@ Sample JSON
 
 The Project is yet under construction with TODO items as follows :
 
---Test Coverage is pending for unit and integration tests
---Addition of more apis or functionalities to better handle crud operations of insurer 
---No authorization or security has been implemented yet
---Unable to insert insurers with duplicate postcode or occupation that already exist in DB (known bug)
--- Test resources separation from main resources
+Exception Hndling with custom exceptions
+Test Coverage is pending for unit and integration tests
+Addition of more apis or functionalities to better handle crud operations of insurer 
+No authorization or security has been implemented yet
+Unable to insert insurers with duplicate postcode or occupation that already exist in DB (known bug)
+Test resources separation from main resources
 
 
 
