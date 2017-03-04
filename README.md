@@ -9,6 +9,30 @@ mvn spring-boot:run -Dserver.port=8383    (port where we want tomcat to run
 
 Following are the availble apis(assuming we are running the default tomcat provided by spring boot on localhost):
 
+Insert Multiple insurers 
+
+URL
+http://localhost:8383/rest/api/insurer/addMultiple
+
+Sample JSON:
+
+[{
+	"name":"InsurerA",
+	"website":"www.insurerA.com",
+	"excludedPostCodes":[{"postCode":2006},{"postCode":2202}],
+	"excludedOccupations":[{"occupation":"Barber"}],
+	"minimumTurnOver":195000
+},
+{
+	"name":"InsurerC",
+	"website":"www.insurerC.com",
+	"excludedPostCodes":[{"postCode":2008},{"postCode":2203}],
+	"excludedOccupations":[{"occupation":"Butler"}],
+	"minimumTurnOver":127000
+}
+
+]
+
 Insert Insurer 
 
 URL:
@@ -44,12 +68,12 @@ Sample JSON
 
 The Project is yet under construction with TODO items as follows :
 
-<p>Exception Hndling with custom exceptions</p>
-<p>Test Coverage is pending for unit and integration tests</p>
-<p>Addition of more apis or functionalities to better handle crud operations of insurer </p>
-<p>No authorization or security has been implemented yet</p>
-<p>Unable to insert insurers with duplicate postcode or occupation that already exist in DB (known bug)</p>
-<p>Test resources separation from main resources</p>
+
+<p>*Test Coverage is pending for unit and integration tests</p>
+<p>*Addition of more apis or functionalities to better handle crud operations of insurer </p>
+<p>*No authorization or security has been implemented yet</p>
+<p>*Unable to insert insurers with duplicate postcode or occupation that already exist in DB (known bug)</p>
+<p>*Test resources separation from main resources</p>
 
 
 
