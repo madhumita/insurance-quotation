@@ -13,11 +13,13 @@ Following are the availble apis(assuming we are running the default tomcat provi
 
 <h2>REST API(s) exposed by the Application</h2>
 
-<p>Api to retrieve quote for Customer with Insurers eligible for Panel:
-
+<h3>Api to retrieve quote for Customer with Insurers eligible for Panel:</h3>
+<p>
 URL:
 http://localhost:8383/rest/api/customer/quotation
-
+</p>
+<br></br>
+<p>
 Sample JSON
 { 
     "name":"Madhu",
@@ -26,27 +28,28 @@ Sample JSON
     "turnOver" : 116000
  }
 </p>
-
+<br></br>
 <p>
-To help the application to achieve the functionality of above API following apis are available:
+<h3>To help the application to achieve the functionality of above API following apis are available:</h3>
 
-Get all Insurers in DB:
+<h3>Get all Insurers in DB:</h3>
 
-Url: http://localhost:8383/rest/api/insurer/getInsurers
+<p>Url: http://localhost:8383/rest/api/insurer/getInsurers</p>
 
-Get all PostCodes in DB:
+<h3>Get all PostCodes in DB:</h3>
 
-Url: http://localhost:8383/rest/api/insurer/getPostCodes
+<p>Url: http://localhost:8383/rest/api/insurer/getPostCodes</p>
 
-Get all Occupations in DB:
+<h3>Get all Occupations in DB:</h3>
 
-Url: http://localhost:8383/rest/api/insurer/getOccupations
+<p>Url: http://localhost:8383/rest/api/insurer/getOccupations</p>
 
-Insert Multiple Insurers :
+<h3>Insert Multiple Insurers :</h3>
 
-Url:
-http://localhost:8383/rest/api/insurer/addMultiple
-
+<p>Url:
+http://localhost:8383/rest/api/insurer/addMultiple</p>
+<p>Sample JSON:</p>
+<p>
 [{
 	"name":"InsurerA",
 	"website":"www.insurerA.com",
@@ -63,14 +66,15 @@ http://localhost:8383/rest/api/insurer/addMultiple
 }
 
 ]
+</p>
 
+<h3>Insert Single Insurer</h3>
+<p>URL:
+http://localhost:8383/rest/api/insurer</p>
 
-Insert Single Insurer
-URL:
-http://localhost:8383/rest/api/insurer
+<p>Sample JSON for storing some Insurers before Customer requests quotation:</p>
 
-Sample JSON for storing some Insurers before Customer requests quotation:
-
+<p>
 {
 	"name":"InsurerB",
 	"website":"www.insurerB.com",
@@ -83,7 +87,7 @@ Sample JSON for storing some Insurers before Customer requests quotation:
 
 
 <p>
-The Project has certain drawbacks and may be improved as follows :
+<h3>The Project has certain drawbacks and may be improved as follows :</h3>
 
 <p>*Test Coverage is pending for unit and integration tests</p>
 <p>* Detailed Custom Error /Exception Framework</p>
