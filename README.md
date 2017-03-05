@@ -10,6 +10,7 @@ The application contains a data.sql that helps to insert initial data in appropr
 
 Following are the availble apis(assuming we are running the default tomcat provided by spring boot on localhost):
 
+
 <h2>REST API(s) exposed by the Application</h2>
 
 <p>Api to retrieve quote for Customer with Insurers eligible for Panel:
@@ -28,6 +29,7 @@ Sample JSON
 
 <p>
 To help the application to achieve the functionality of above API following apis are available:
+
 Get all Insurers in DB:
 
 Url: http://localhost:8383/rest/api/insurer/getInsurers
@@ -80,15 +82,15 @@ Sample JSON for storing some Insurers before Customer requests quotation:
 </p>
 
 
-
 <p>
 The Project has certain drawbacks and may be improved as follows :
 
-<p>* Test Coverage is pending for unit and integration tests</p>
-<p>* Addition of more apis or functionalities to better handle crud operations of insurer </p>
-<p>* No authorization or security has been implemented yet</p>
-<p>* Unable to insert insurers with duplicate postcode or occupation that already exist in DB (known bug)</p>
-<p>* Test resources separation from main resources</p>
+<p>*Test Coverage is pending for unit and integration tests</p>
+<p>* Detailed Custom Error /Exception Framework</p>
+<p>*Addition of more apis or functionalities to better handle crud operations of insurer </p>
+<p>*No authorization or security has been implemented yet</p>
+<p>*Unable to insert insurers with duplicate postcode or occupation that already exist in DB (known bug)</p>
+<p>*Test resources separation from main resources</p>
 </p>
 
 
