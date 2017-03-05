@@ -56,7 +56,7 @@ public class InsurerApiControllerTest {
 				"Insurer1", 190000);
 		ResponseEntity<Insurer> responseAfterFirstInsert = template
 				.postForEntity(base.toString(), insurer1, Insurer.class);
-		Insurer insurer2 = TestDataUtil.getInsurer("2010", "1201", "BUTCHER",
+		Insurer insurer2 = TestDataUtil.getInsurer("2010", "1201", "ACTRESS",
 				"Insurer2", 160000);
 		ResponseEntity<Insurer> responseAfterSecondInsert = template
 				.postForEntity(base.toString(), insurer2, Insurer.class);

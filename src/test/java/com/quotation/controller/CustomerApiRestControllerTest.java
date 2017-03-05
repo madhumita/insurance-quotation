@@ -69,7 +69,7 @@ public class CustomerApiRestControllerTest {
     @Test
     public void getEligibleInsurersTestwhenPanelhasNoEligibleInsurers() throws Exception{
     	CustomerQuery query = TestDataUtil.getRequestQuery();
-    	Insurer insurer = TestDataUtil.getInsurer("2000","1200","PAINTER","Insurer1",190000);
+    	Insurer insurer = TestDataUtil.getInsurer("2600","1208","PAINTER","Insurer1",199000);
     	ResponseEntity<Insurer> responseAfterInsert = template.postForEntity(base.toString(), insurer, Insurer.class);
     	this.base = new URL("http://localhost:" + port + "/rest/api/customer/quotation");
         ResponseEntity<Map> response = template.postForEntity(base.toString(), query, Map.class);
@@ -100,14 +100,14 @@ public class CustomerApiRestControllerTest {
     @Test
     public void getEligibleInsurersTestwhenPanelContainsInsurer() throws Exception {
     	CustomerQuery query = TestDataUtil.getRequestQuery();
-    	Insurer insurer = TestDataUtil.getInsurer("2000","1200","PAINTER","Insurer1",170000);
+    	Insurer insurer = TestDataUtil.getInsurer("2000","1200","PAINTER","Insurer1",5000);
     	this.base = new URL("http://localhost:" + port + "/rest/api/insurer");
     	ResponseEntity<Insurer> responseAfterInsert = template.postForEntity(base.toString(), insurer, Insurer.class);
     	this.base = new URL("http://localhost:" + port + "/rest/api/customer/quotation");
         ResponseEntity<Map> response = template.postForEntity(base.toString(), query, Map.class);
         assertNotNull(response.getBody());
         assertEquals("200",response.getStatusCode().toString());
-        assertEquals("{Insurer1=200000.0}",response.getBody().toString());
+        assertTrue((response.getBody().toString()).contains("Insurer1=200000.0"));
     }
      
    

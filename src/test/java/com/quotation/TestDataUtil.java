@@ -20,7 +20,7 @@ public class TestDataUtil {
 		 query.setName("MADHUMITA");
 		 query.setOccupation("PAINTER");
 		 query.setPostCode("2100");
-		 query.setTurnOver(186000);
+		 query.setTurnOver(16000);
 		 
 		 return query;
 	}
@@ -28,13 +28,13 @@ public class TestDataUtil {
 	public static List<Insurer> getInsurers(){
 		//create 1 insurer
 		 PostCode postCode1 = new PostCode();
-		 postCode1.setPostCode("2009");
+		 postCode1.setPostCode("2809");
 		 
 		 PostCode postCode2 = new PostCode();
-		 postCode2.setPostCode("2019");
+		 postCode2.setPostCode("2819");
 		 
 		 Occupation occupation = new Occupation();
-		 occupation.setOccupation("COBBLER");
+		 occupation.setOccupation("PROGRAMMER");
 		 
 		 Insurer insurer1 = new Insurer();
 		 insurer1.setMinimumTurnOver(116000);
@@ -46,13 +46,13 @@ public class TestDataUtil {
 		 
 		 //create second insurer
 		 PostCode postCode3 = new PostCode();
-		 postCode1.setPostCode("2004");
+		 postCode1.setPostCode("2804");
 		 
 		 PostCode postCode4 = new PostCode();
-		 postCode2.setPostCode("2014");
+		 postCode2.setPostCode("2814");
 		 
 		 Occupation occupation2 = new Occupation();
-		 occupation.setOccupation("BARBER");
+		 occupation.setOccupation("BROKER");
 		 
 		 Insurer insurer2 = new Insurer();
 		 insurer2.setMinimumTurnOver(166000);
@@ -74,13 +74,13 @@ public class TestDataUtil {
 		//create 1 insurer
 		//create 1 insurer
 		 PostCode postCode1 = new PostCode();
-		 postCode1.setPostCode("2009");
+		 postCode1.setPostCode("2809");
 		 
 		 PostCode postCode2 = new PostCode();
-		 postCode2.setPostCode("2019");
+		 postCode2.setPostCode("2819");
 		 
 		 Occupation occupation = new Occupation();
-		 occupation.setOccupation("COBBLER");
+		 occupation.setOccupation("PROGRAMMER");
 		 
 		 Insurer insurer1 = new Insurer();
 		 insurer1.setMinimumTurnOver(116000);
@@ -98,10 +98,10 @@ public class TestDataUtil {
 	public static List<Insurer> getInsurersWithExcludedPostCodeAndOccupation(){
 		//create 1 insurer
 		 PostCode postCode1 = new PostCode();
-		 postCode1.setPostCode("2005");
+		 postCode1.setPostCode("2805");
 		 		 
 		 Occupation occupation = new Occupation();
-		 occupation.setOccupation("BUTCHER");
+		 occupation.setOccupation("ACTOR");
 		 
 		 Insurer insurer1 = new Insurer();
 		 insurer1.setMinimumTurnOver(136000);
@@ -111,10 +111,10 @@ public class TestDataUtil {
 		 		 
 		 //create second insurer
 		 PostCode postCode3 = new PostCode();
-		 postCode1.setPostCode("2005");
+		 postCode1.setPostCode("2805");
 			 
 		 Occupation occupation2 = new Occupation();
-		 occupation.setOccupation("BUTCHER");
+		 occupation.setOccupation("ACTOR");
 		 
 		 Insurer insurer2 = new Insurer();
 		 insurer2.setMinimumTurnOver(166000);
