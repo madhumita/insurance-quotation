@@ -12,6 +12,7 @@ import com.quotation.configuration.ApplicationConfiguration;
 import com.quotation.entity.Insurer;
 import com.quotation.entity.Occupation;
 import com.quotation.entity.PostCode;
+import com.quotation.exception.InsurerNotFoundException;
 import com.quotation.model.CustomerQuery;
 import com.quotation.model.ExclusionReason;
 import com.quotation.repository.InsurerRepository;
@@ -51,15 +52,30 @@ public class InsurerServiceImpl implements InsurerService {
 		return insurerRepository.findAll();
 	}
 
-	public Insurer findById(long id) {
-		return insurerRepository.findOne(id);
+	public List<PostCode> findAllPostCodes() {
+		return postCodeRepository.findAll();
 	}
 
-	public Insurer findByName(String name) {
+	public List<Occupation> findAllOccupations() {
+		return occupationRepository.findAll();
+	}
+
+	public Insurer findById(long id) throws Exception {
+		try {
+			return insurerRepository.findOne(id);
+		} catch (Exception e) {
+			throw new InsurerNotFoundException(
+					"No Insurer with provided name exist in DB!");
+		}
+
+	}
+
+	public Insurer findByName(String name) throws Exception {
 		if (insurerRepository.findByName(name) != null)
 			return insurerRepository.findByName(name).get(0);
 		else
-			return null;
+			throw new InsurerNotFoundException(
+					"No Insurer with provided name exist in DB!");
 	}
 
 	public List<PostCode> findPostCodeByCode(String postCode) {
@@ -89,13 +105,29 @@ public class InsurerServiceImpl implements InsurerService {
 
 	}
 
-	public Map<String, Double> checkCriteriaAndReturnQuote(CustomerQuery query) {
+	public void saveMultipleInsurers(List<Insurer> insurers) {
+		insurerRepository.save(insurers);
+
+	}
+
+	/*
+	 * This method checks the insurers against provided Business rules logic to
+	 * determine the list of insurers on the panel
+	 * 
+	 * @see
+	 * com.quotation.service.InsurerService#checkCriteriaAndReturnQuote(com.
+	 * quotation.model.CustomerQuery)
+	 */
+	public Map<String, Double> checkCriteriaAndReturnQuote(CustomerQuery query)
+			throws InsurerNotFoundException {
 
 		List<Insurer> allInsurers = findAllInsurers();
 
 		Map<String, Double> finalList = iCriteriaInsurer
 				.checkCriteriaAndReturnQuote(query, allInsurers);
-
+		if (finalList == null || finalList.isEmpty())
+			throw new InsurerNotFoundException(
+					"There are no eligible insurers for this Quote!");
 		return finalList;
 
 	}
@@ -108,6 +140,14 @@ public class InsurerServiceImpl implements InsurerService {
 		occupationRepository.save(occupation);
 	}
 
+	/*
+	 * (non-Javadoc) TODO method to return all insurers with exclusion reason if
+	 * applicable(TBD)
+	 * 
+	 * @see
+	 * com.quotation.service.InsurerService#findAllInsurersforRequestedQuote
+	 * (java.lang.String)
+	 */
 	public Map<Insurer, ExclusionReason> findAllInsurersforRequestedQuote(
 			String postCode) {
 		List<Insurer> allInsurers = findAllInsurers();

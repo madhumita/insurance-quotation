@@ -20,7 +20,9 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/**Entity to map the Occupation in DB
+/**
+ * Entity to map the Occupation in DB
+ * 
  * @author MADHUMITA
  *
  */
@@ -28,19 +30,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Occupation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="OCCUPATION",unique=true)
+
+	@Column(name = "OCCUPATION", unique = true)
 	private String occupation;
-	
+
 	@ManyToMany(mappedBy = "excludedOccupations")
 	@JsonIgnore
-	private Set<Insurer> insurers = new HashSet<Insurer>();	
-	
-	public Occupation() {}
+	private Set<Insurer> insurers = new HashSet<Insurer>();
+
+	public Occupation() {
+	}
+
 	public Occupation(String occupation) {
 		this.occupation = occupation;
 	}
@@ -48,8 +52,7 @@ public class Occupation implements Serializable {
 	public Set<Insurer> getInsurers() {
 		return insurers;
 	}
-	
-	
+
 	public long getId() {
 		return id;
 	}
@@ -61,23 +64,24 @@ public class Occupation implements Serializable {
 	public String getOccupation() {
 		return occupation;
 	}
-	
+
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
-	
+
 	@Override
-    public boolean equals(Object o) {
+	public boolean equals(Object o) {
 
-        if (o == this) return true;
-        if (!(o instanceof Occupation)) {
-            return false;
-        }
+		if (o == this)
+			return true;
+		if (!(o instanceof Occupation)) {
+			return false;
+		}
 
-        Occupation occupation = (Occupation) o;
+		Occupation occupation = (Occupation) o;
 
-        return occupation.occupation.equals(occupation);
-                
-    }
+		return occupation.occupation.equals(occupation);
+
+	}
 
 }

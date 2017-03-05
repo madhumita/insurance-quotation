@@ -15,7 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-/**Entity to map the Insurer in DB
+/**
+ * Entity to map the Insurer in DB
+ * 
  * @author MADHUMITA
  *
  */
@@ -27,8 +29,6 @@ public class Insurer implements Serializable {
 
 	@Id
 	@Column(name = "INSURER_ID")
-	// @SequenceGenerator(name = "INSURER_SEQ", sequenceName = "INSURER_SEQ",
-	// allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
@@ -38,11 +38,11 @@ public class Insurer implements Serializable {
 	@Column(name = "INSURER_WEBSITE")
 	private String website;
 
-	@ManyToMany(targetEntity = PostCode.class, cascade = {CascadeType.ALL})
+	@ManyToMany(targetEntity = PostCode.class, cascade = { CascadeType.ALL })
 	@JoinTable(name = "INSURER_POSTCODE", joinColumns = { @JoinColumn(name = "INSURER_ID") }, inverseJoinColumns = { @JoinColumn(name = "POSTCODE_ID") })
 	private Set<PostCode> excludedPostCodes = new HashSet<PostCode>();
 
-	@ManyToMany(targetEntity = Occupation.class, cascade = {CascadeType.ALL})
+	@ManyToMany(targetEntity = Occupation.class, cascade = { CascadeType.ALL })
 	@JoinTable(name = "INSURER_OCCUPATION", joinColumns = { @JoinColumn(name = "INSURER_ID") }, inverseJoinColumns = { @JoinColumn(name = "OCCUPATION_ID") })
 	private Set<Occupation> excludedOccupations = new HashSet<Occupation>();
 
@@ -87,7 +87,7 @@ public class Insurer implements Serializable {
 	public Set<Occupation> getExcludedOccupations() {
 		return excludedOccupations;
 	}
- 
+
 	public long getMinimumTurnOver() {
 		return minimumTurnOver;
 	}
@@ -95,21 +95,21 @@ public class Insurer implements Serializable {
 	public void setMinimumTurnOver(long minimumTurnOver) {
 		this.minimumTurnOver = minimumTurnOver;
 	}
-	
-	 @Override
-	    public boolean equals(Object o) {
 
-	        if (o == this) return true;
-	        if (!(o instanceof Insurer)) {
-	            return false;
-	        }
+	@Override
+	public boolean equals(Object o) {
 
-	        Insurer insurer = (Insurer) o;
+		if (o == this)
+			return true;
+		if (!(o instanceof Insurer)) {
+			return false;
+		}
 
-	        return insurer.name.equals(name) &&
-	        		insurer.website == website &&
-	        		insurer.minimumTurnOver == minimumTurnOver;
-	                
-	    }
+		Insurer insurer = (Insurer) o;
+
+		return insurer.name.equals(name) && insurer.website == website
+				&& insurer.minimumTurnOver == minimumTurnOver;
+
+	}
 
 }

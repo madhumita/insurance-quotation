@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.quotation.entity.Insurer;
@@ -23,6 +24,6 @@ import com.quotation.entity.PostCode;
 public interface PostCodeRepository extends JpaRepository<PostCode, Long> {
 	
 	@Cacheable(value = "postCodeCache", cacheManager = "postCodeCacheManager")
-	public List<PostCode> findByPostCode(String postCode);
+	public List<PostCode> findByPostCode(@Param("postCode") String postCode);
 
 }

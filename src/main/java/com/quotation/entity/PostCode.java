@@ -18,7 +18,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/**Entity to map PostCode in DB
+/**
+ * Entity to map PostCode in DB
+ * 
  * @author MADHUMITA
  *
  */
@@ -34,7 +36,7 @@ public class PostCode implements Serializable {
 	@Column(name = "POSTCODE", unique = true)
 	private String postCode;
 
-	@ManyToMany(mappedBy = "excludedPostCodes", cascade = { CascadeType.ALL })
+	@ManyToMany(mappedBy = "excludedPostCodes")
 	@JsonIgnore
 	private Set<Insurer> insurers = new HashSet<Insurer>();
 
@@ -64,20 +66,20 @@ public class PostCode implements Serializable {
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
-	
+
 	@Override
-    public boolean equals(Object o) {
+	public boolean equals(Object o) {
 
-        if (o == this) return true;
-        if (!(o instanceof PostCode)) {
-            return false;
-        }
+		if (o == this)
+			return true;
+		if (!(o instanceof PostCode)) {
+			return false;
+		}
 
-        PostCode postCode = (PostCode) o;
+		PostCode postCode = (PostCode) o;
 
-        return postCode.postCode.equals(postCode);
-                
-    }
+		return postCode.postCode.equals(postCode);
 
+	}
 
 }
